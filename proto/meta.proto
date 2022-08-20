@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package meta;
+
+service MetaService {
+  rpc Country (CountryRequest) returns (CountryResponse) {}
+  rpc State (StateRequest) returns (StateResponse) {}
+  rpc City (CityRequest) returns (CityResponse) {}
+}
+
+message Country {
+  int32 id = 1;
+  string code = 2;
+  string name = 3;
+}
+
+message State {
+  int32 id = 1;
+  string name = 2;
+}
+
+message City {
+  int32 id = 1;
+  string name = 2;
+}
+
+// Users will provide full or partial name to get list of matching countries
+message CountryRequest {
+  string name = 1;
+}
+
+/*
+  Will be responded with list of matching countries
+  and their respective states - India only supported
+*/ 
+message CountryResponse {
+  int32 status = 1;
+  repeated Country countries = 2;
+  repeated State states = 3;
+  repeated string error = 4;
+}
+
+message StateRequest {
+  string name = 1;
+}
+
+/*
+  Matching states and respective cities
+  will be returned
+*/
+message StateResponse {
+  int32 status = 1;
+  repeated State states = 2;
+  repeated City cities = 3; 
+  repeated string error = 4;
+}
+
+message CityRequest {
+    string name = 1;
+}
+
+message CityResponse {
+  int32 status = 1;
+  repeated City cities = 2; 
+  repeated string error = 3;
+}
