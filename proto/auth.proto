@@ -10,21 +10,12 @@ service AuthService {
 
 // Register
 
-message PhoneNumber {
-  required int32 country_code = 91;
-  enum CountryCodeSource {
-  //  UNSPECIFIED = 0;
-    FROM_NUMBER_WITH_PLUS_SIGN = 1;
-    FROM_NUMBER_WITHOUT_PLUS_SIGN = 10;
-  }
-
-}
-
 message RegisterRequest {
 
   required string first_name = 1;
   required string last_name = 2;
-  required int32 PhoneNumber phoneNumber = 3;
+  required int32 mobileNumber = 3;
+  
 }
 
 message RegisterResponse {
@@ -36,9 +27,10 @@ message RegisterResponse {
 
 message LoginRequest {
   string email = 1;
+  string password = 2;
   string user_name = 3;
   int32 mobile_number = 4;
-  string password = 2;
+  
 }
 
 message LoginResponse {
